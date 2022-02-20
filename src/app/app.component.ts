@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+
 
 @Component({
   selector: 'app-root',
@@ -6,5 +8,20 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
+  nombre='';
+  valor1: number=10;
+  articulos: any;
   title = 'angulartest';
+
+  constructor(private http: HttpClient) { }
+
+  ngOnInit() {
+    this.http.get("https://scratchya.com.ar/vue/datos.php")
+      .subscribe(
+        resultado => {
+          this.articulos = resultado;
+        }
+      );
+  }
+
 }
